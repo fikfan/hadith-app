@@ -1,46 +1,38 @@
 ---
-import { componentIsHTMLElement } from 'astro/runtime/server/render/dom.js';
 import Layout from '../layouts/Layout.astro';
-const min = 2960;
-const max = 3060;
-// const response = await fetch(`https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=2962`);
-// const data = await response.json();
-
+import Card from '../components/Card.astro';
+import CardComponent from '../components/CardComponent.vue';
+import { ref } from 'vue';
 ---
 
 <Layout title="Hadis app test">
 	<main>
 		<div>			
-			<div class="bg-slate-500 rounded-xl p-4 shadow-xl text-center grid gap-4">
-				<!-- <p>{data.title}</p>
-				<p>{data.hadeeth}</p>
-				<p class="text-red-800">{data.attribution}</p>
-				<p class="text-blue-500">{data.grade}</p>
-				<p class="">{data.explanation}</p> -->
-
-				<p class="text-lg font-semibold">The first cases to be settled among people on the Day of Judgment will be the cases of blood (homicide).</p>
-				<p class="p-2 bg-red-200 italic font-light text-center rounded indent-6">‘Abdullāh ibn Mas‘ūd (may Allah be pleased with him) reported that the Prophet (may Allah's peace and blessings be upon him) said: "The first cases to be settled among people on the Day of Judgment will be the cases of blood (homicide)."</p>
-				<div>
-					<span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-black rounded-full">[Al-Bukhari and Muslim. This is the wording of Muslim]</span>
-
-					<span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-blue-600 bg-green-300 rounded-full">Sahih/Authentic</span>
-				</div>
-				<p class="font-bold">Explanation</p>
-				<p class="p-2 bg-red-300 rounded indent-6 text-justify">On the Day of Judgment, Allah, the Almighty, shall call His slaves to account. Then, He shall judge between them with His justice, starting with the most important grievances. Homicide is the gravest and most dangerous grievance; therefore, it will be the first case to be settled on that great Day. This is with regard to the injustices committed among people. Regarding the slave's own deeds, however, the first deed to be judged upon will be prayer.</p>
-				<p class="font-bold font-serif text-2xl">بارك الله فيك</p>
-			</div>
-			
+			<!-- <Card :data="data" /> -->
+			<CardComponent client:visible/>
 		</div>
 	</main>
 </Layout>
+
+<script setup>
+// const data = ref(null);
+
+// const fetchHadeeth = async () => {
+//   const random = Math.floor(Math.random() * (3200 - 2900 + 1)) + 2900;
+//   const response = await fetch(`https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${random}`);
+//   data.value = await response.json();
+// 	console.log(data.value);
+// };
+
+// console.log(fetchHadeeth);
+
+
+</script>
 
 <style>
 body {
 	background-color: #292929;
 }
-
-
-
 main {
 	margin: 0 auto;
 	max-width: 800px;

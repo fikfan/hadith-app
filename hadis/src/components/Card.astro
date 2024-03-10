@@ -1,0 +1,15 @@
+---
+const {data} = Astro.props;
+---
+
+<div class="bg-slate-500 rounded-xl p-4 shadow-xl text-center grid gap-4">
+  <p class="text-lg font-semibold">{data.title}</p>
+  <p class="p-2 bg-red-200 italic font-light text-center rounded indent-6">{data.hadeeth}</p>
+  <div>
+    <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-black rounded-full">{data.attribution}</span>
+    <span class="inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-blue-600 bg-green-300 rounded-full">{data.grade}</span>
+  </div>
+  <p class="font-bold">Explanation</p>
+  <p class="p-2 bg-red-300 rounded indent-6 text-justify">{data.explanation}</p>
+  <p class="font-bold font-serif text-2xl">بارك الله فيك</p>
+</div>
