@@ -79,9 +79,7 @@ export default {
     },
     copy() {
       const text = `
-        ${this.hadis.hadeeth}\nGrade: ${this.hadis.grade.slice(0, -1)} - ${
-        this.hadis.attribution
-      }\n\nExplanation:\n\n${this.hadis.explanation}}
+        ${this.hadis.hadeeth}\n\nGrade: ${this.hadis.grade.slice(0, -1)} - ${this.hadis.attribution}
       `;
       navigator.clipboard.writeText(text);
     },
