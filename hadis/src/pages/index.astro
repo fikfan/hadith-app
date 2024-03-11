@@ -5,36 +5,21 @@ import CardComponent from '../components/CardComponent.vue';
 import { ref } from 'vue';
 ---
 
-<Layout title="Hadis app test">
+<Layout title="Hadeeth From A Press">
 	<main>
-		<div>			
-			<!-- <Card :data="data" /> -->
+		<div class="py-8 px-4">			
 			<CardComponent client:visible/>
 		</div>
 	</main>
 </Layout>
 
-<script setup>
-// const data = ref(null);
-
-// const fetchHadeeth = async () => {
-//   const random = Math.floor(Math.random() * (3200 - 2900 + 1)) + 2900;
-//   const response = await fetch(`https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${random}`);
-//   data.value = await response.json();
-// 	console.log(data.value);
-// };
-
-// console.log(fetchHadeeth);
-
-
-</script>
 
 <style>
 body {
 	background-color: #292929;
 }
 main {
-	margin: 0 auto;
+	margin: auto;
 	max-width: 800px;
 }
 
