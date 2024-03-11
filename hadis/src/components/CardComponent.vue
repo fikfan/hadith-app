@@ -1,18 +1,47 @@
 <template>
   <div>
-    <div v-if="hadis" class="bg-black rounded-xl p-4 shadow-xl text-center grid gap-4" :class="hadis ? 'mb-4' : ''">
-      <p class="text-xs sm:text-base p-2 text-white border-white border italic text-justify rounded indent-6">{{ hadis.hadeeth }}</p>
+    <div
+      v-if="hadis"
+      class="bg-black rounded-xl p-4 shadow-xl text-center grid gap-4"
+      :class="hadis ? 'mb-4' : ''"
+    >
+      <p class="font-bold text-sm md:text-base text-stone-200">Hadeeth</p>
+      <p
+        class="text-xs sm:text-base p-2 bg-zinc-950 text-stone-200 border-white border italic text-justify rounded indent-6"
+      >
+        {{ hadis.hadeeth }}
+      </p>
       <div class="flex gap-2 justify-center">
-        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-black bg-white rounded-full">{{ hadis.attribution }}</span>
-        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none bg-green text-white border border-green rounded-full">{{ hadis.grade.slice(0, -1) }}</span>
+        <span
+          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-black bg-stone-200 rounded-full"
+          >{{ hadis.attribution }}</span
+        >
+        <span
+          class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-stone-200 border rounded-full"
+          >{{ hadis.grade.slice(0, -1) }}</span
+        >
       </div>
-      <p class="font-bold text-sm md:text-base text-white">Explanation</p>
-      <p class="p-2 bg-black text-white border border-white rounded indent-6 text-justify text-xs sm:text-base">{{ hadis.explanation }}</p>
+      <p class="font-bold text-sm md:text-base text-stone-200">Explanation</p>
+      <p
+        class="p-2 bg-zinc-950 text-stone-200 border-white border rounded indent-6 text-justify text-xs sm:text-base"
+      >
+        {{ hadis.explanation }}
+      </p>
     </div>
-    <button @click="fetchHadeeth()" id="fetch" class="bg-white text-black p-3 sm:p-4 text-sm sm:text-base rounded-xl hover:bg-black hover:text-white w-fit mx-auto flex">
-      {{ hadis ? 'Another one?' : (loading ? 'Loading...' : 'Generate Hadeeth') }}
+    <button
+      @click="fetchHadeeth()"
+      id="fetch"
+      class="bg-white text-black p-3 sm:p-4 text-sm sm:text-base rounded-xl hover:bg-black hover:text-white w-fit mx-auto flex"
+    >
+      {{ hadis ? "Another one?" : loading ? "Loading..." : "Generate Hadeeth" }}
     </button>
-    <button v-if="hadis" @click="changeText" class="bg-white text-black p-3 sm:p-4 mt-2 text-sm sm:text-base rounded-xl hover:bg-black hover:text-white w-fit mx-auto flex">{{ buttonText }}</button>
+    <button
+      v-if="hadis"
+      @click="changeText"
+      class="bg-white text-black p-3 sm:p-4 mt-2 text-sm sm:text-base rounded-xl hover:bg-black hover:text-white w-fit mx-auto flex"
+    >
+      {{ buttonText }}
+    </button>
   </div>
 </template>
 
@@ -23,16 +52,18 @@ export default {
       num: null,
       hadis: null,
       loading: false,
-      buttonText: 'Copy?',
-    }
+      buttonText: "Copy?",
+    };
   },
   methods: {
     async fetchHadeeth() {
       if (this.loading) return; // Prevent multiple requests
-      
+
       this.loading = true;
       this.num = Math.floor(Math.random() * (3200 - 2900 + 1)) + 2900;
-      const response = await fetch(`https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${this.num}`);
+      const response = await fetch(
+        `https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${this.num}`
+      );
       this.hadis = await response.json();
 
       setTimeout(() => {
@@ -41,21 +72,21 @@ export default {
     },
     changeText() {
       this.copy();
-      this.buttonText = 'Copied! Thank you for your support! ❤️';
+      this.buttonText = "Copied! Thank you for your support! ❤️";
       setTimeout(() => {
-        this.buttonText = 'Copy?';
+        this.buttonText = "Copy?";
       }, 2000);
     },
     copy() {
       const text = `
-        ${this.hadis.hadeeth}\nGrade: ${this.hadis.grade.slice(0, -1)} - ${this.hadis.attribution}\n\nExplanation:\n\n${this.hadis.explanation}}
-      `
+        ${this.hadis.hadeeth}\nGrade: ${this.hadis.grade.slice(0, -1)} - ${
+        this.hadis.attribution
+      }\n\nExplanation:\n\n${this.hadis.explanation}}
+      `;
       navigator.clipboard.writeText(text);
-    }
+    },
   },
-}
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
