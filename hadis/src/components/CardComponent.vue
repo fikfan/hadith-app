@@ -60,12 +60,20 @@ export default {
       if (this.loading) return; // Prevent multiple requests
 
       this.loading = true;
-      this.num = Math.floor(Math.random() * (3200 - 2900 + 1)) + 2900;
       const response = await fetch(
-        `https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${this.num}`
+        "https://hadeethenc.com/api/v1/hadeeths/list/?language=en&category_id=137&per_page=57"
       );
-      this.hadis = await response.json();
 
+      const data = await response.json();
+      const ids = data.data.map((hadeeth) => hadeeth.id);
+      const randomId = ids[Math.floor(Math.random() * ids.length)];
+      const hadisResponse = await fetch(
+        `https://hadeethenc.com/api/v1/hadeeths/one/?language=en&id=${randomId}`
+      );
+      const hadisData = await hadisResponse.json();
+      this.hadis = hadisData;
+
+      // Allow another request after timeout
       setTimeout(() => {
         this.loading = false; // Allow another request after timeout
       }, 2000);
@@ -75,11 +83,13 @@ export default {
       this.buttonText = "Copied! Thank you for your support! ❤️";
       setTimeout(() => {
         this.buttonText = "Copy?";
-      }, 2000);
+      }, 3000);
     },
     copy() {
       const text = `
-        ${this.hadis.hadeeth}\n\nGrade: ${this.hadis.grade.slice(0, -1)} - ${this.hadis.attribution}
+        ${this.hadis.hadeeth}\n\nGrade: ${this.hadis.grade.slice(0, -1)} - ${
+        this.hadis.attribution
+      }
       `;
       navigator.clipboard.writeText(text);
     },
