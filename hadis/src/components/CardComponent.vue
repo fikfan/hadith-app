@@ -39,6 +39,7 @@
       v-if="hadis"
       @click="changeText"
       class="bg-white text-black p-3 sm:p-4 mt-2 text-sm sm:text-base rounded-xl hover:bg-black hover:text-white w-fit mx-auto flex"
+      :class="{ copied: copied }"
     >
       {{ buttonText }}
     </button>
@@ -53,6 +54,7 @@ export default {
       hadis: null,
       loading: false,
       buttonText: "Copy?",
+      copied: false,
     };
   },
   methods: {
@@ -78,11 +80,13 @@ export default {
         this.loading = false; // Allow another request after timeout
       }, 2000);
     },
-    changeText() {
+    async changeText() {
       this.copy();
       this.buttonText = "Copied! Thank you for your support! ❤️";
+      this.copied = true;
       setTimeout(() => {
         this.buttonText = "Copy?";
+        this.copied = false;
       }, 3000);
     },
     copy() {
@@ -97,4 +101,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.copied {
+  background-color: #292929;
+  color: white;
+  cursor: auto;
+}
+</style>
